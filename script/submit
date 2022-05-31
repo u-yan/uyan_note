@@ -1,9 +1,12 @@
 #!/bin/bash
+ssh-add dx_qq_github_ed255519 
 time=$(date "+%Y-%m-%d_%H:%M:%S")
 echo $time
 git add -A
 git commit -m $time
 git push note_origin
+
+ssh-add dx_netease_ed255519
 
 
 
