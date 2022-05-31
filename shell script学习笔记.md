@@ -1,4 +1,5 @@
 - 第一行`#!/bin/bash` 带表你选择的解释器
+- `source .bash_profile`， `~\.bash_profile`是用户的环境变量，所以修改的时候要`source .bash_profile`才能生效
 - `echo $var`的时候千万不能忘记`$` 符号。
 - 检测`bash`脚本是否有问题 `bash -n demo.sh`如果没有结果，就代表脚本没问题。
 - `[set]Var_Name=Value` 全局变量的赋值，一般情况下使用全局变量即可，是作用于本脚本所有位置。
