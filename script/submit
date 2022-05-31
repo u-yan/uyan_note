@@ -6,7 +6,7 @@ git add -A
 git commit -m $time
 git push note_origin
 
-ssh-add ~/.ssh/dx_netease_ed255519
+ssh-add ~/.ssh/dx_neteaselab_ef25519
 
 
 
