@@ -206,7 +206,9 @@
 
 
 
-
+```
+MaterialDialog materialDialog = MaterialDialogHelper.materialDialog(BindSettingActivity.this, "title", "content", "first", "second", "thirdText",buttonCallback, true);
+```
 
 
 
