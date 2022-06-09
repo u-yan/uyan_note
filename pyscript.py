@@ -28,3 +28,4 @@ while True:
     FileOperation.os.system("bash submit.sh")
     copyContext = "![](" + "./img/" + str(filenum) + ".png)"# 图片相对路径转化成markdown
     pyperclip.copy(copyContext)
+    print("************sucessed!**************")
