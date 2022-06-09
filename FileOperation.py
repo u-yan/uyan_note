@@ -19,7 +19,6 @@ class FileOperation:
             sub_path = os.path.join(str(self.__filePath), lists)
             print(sub_path)
             if os.path.isfile(sub_path):
-                filenum = filenum+1
-            filenum -= 1
+                filenum = filenum + 1
         return filenum
     
