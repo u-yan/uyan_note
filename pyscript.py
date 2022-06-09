@@ -20,7 +20,7 @@ for lists in os.listdir(Path(goalPath)):
         filenum = filenum+1
     elif os.path.isdir(sub_path):
         dirnum = dirnum+1
-filenum -= 1
+filenum -= 2
 #数量获取成功
 
 goalPath = goalPath + str(filenum)
