@@ -1,5 +1,3 @@
-
-
 import pyperclip
 import FileOperation
 #处理图片路径
