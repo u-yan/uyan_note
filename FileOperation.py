@@ -20,9 +20,6 @@ class FileOperation:
             print(sub_path)
             if os.path.isfile(sub_path):
                 filenum = filenum+1
-            elif os.path.isdir(sub_path):
-                dirnum = dirnum+1
-            filenum -= 2
-            
+            filenum -= 1
         return filenum
     
