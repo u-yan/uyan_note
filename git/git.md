@@ -216,5 +216,6 @@ MaterialDialog materialDialog = MaterialDialogHelper.materialDialog(BindSettingA
 
 
 
+# [Git.ignore](https://docs.github.com/cn/get-started/getting-started-with-git/ignoring-files)
 
-
+`__pycache__/` The ending slash indicates it is a directory and will ignore any files beneath it.
