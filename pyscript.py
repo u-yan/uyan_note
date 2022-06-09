@@ -13,7 +13,7 @@ while True:
             sourcePath += i
     goalPath = "./"
     notePath = input()
-    goalPath += notePath + "/"
+    goalPath += notePath + "/img/"
     # 获取文件夹内文件数量
     
     filenum = FileOperation.FileOperation(goalPath).getImgCnt()
@@ -26,5 +26,5 @@ while True:
     FileOperation.os.rename(sourcePath, goalPath)
     #更改路径成功
     FileOperation.os.system("bash submit.sh")
-    copyContext = "![](" + "./" + str(filenum) + ".png)"# 图片相对路径转化成markdown
+    copyContext = "![](" + "./img/" + str(filenum) + ".png)"# 图片相对路径转化成markdown
     pyperclip.copy(copyContext)

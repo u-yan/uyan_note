@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+from warnings import catch_warnings
 
 class FileOperation:
     __filePath = Path
@@ -9,7 +10,11 @@ class FileOperation:
     def setFilePath(self, path):
         self.__filePath = Path(path)
     def getImgCnt(self):
-        filenum = int()
+        filenum = 0
+        try:
+            os.listdir(self.__filePath)
+        except Exception:
+            os.makedirs(self.__filePath)
         for lists in os.listdir(self.__filePath):
             sub_path = os.path.join(str(self.__filePath), lists)
             print(sub_path)
@@ -18,5 +23,6 @@ class FileOperation:
             elif os.path.isdir(sub_path):
                 dirnum = dirnum+1
             filenum -= 2
+            
         return filenum
     
