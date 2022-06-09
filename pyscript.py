@@ -28,6 +28,7 @@ goalPath = goalPath + str(filenum)
 print(sourcePath)
 print(goalPath)
 print(filenum)
+goalPath += ".png"
 os.rename(sourcePath, goalPath)
 #更改路径成功
 os.system("bash submit")
