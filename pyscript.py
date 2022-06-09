@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import pyperclip
 #处理图片路径
 path_input = input()
 sourcePath = ""
@@ -33,5 +34,5 @@ os.rename(sourcePath, goalPath)
 #更改路径成功
 os.system("bash submit")
 
-
+pyperclip.copy("./" + str(filenum) + ".png")
 
