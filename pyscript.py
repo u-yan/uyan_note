@@ -33,6 +33,7 @@ goalPath += ".png"
 os.rename(sourcePath, goalPath)
 #更改路径成功
 os.system("bash submit")
+copyContext = "![](" + "./" + str(filenum) + ".png)"
 
-pyperclip.copy("./" + str(filenum) + ".png")
+pyperclip.copy(copyContext)
 
