@@ -13,11 +13,10 @@ while True:
     notePath = input()
     goalPath += notePath + "/img/"
     # 获取文件夹内文件数量
-    
     filenum = FileOperation.FileOperation(goalPath).getImgCnt()
     #数量获取成功
     goalPath = goalPath + str(filenum)
-    goalPath += ".png" # 
+    goalPath += ".png" #
     print(sourcePath)
     print(goalPath)
     print(filenum)
