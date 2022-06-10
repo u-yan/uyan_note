@@ -52,7 +52,7 @@
 
 
 
-重启一下windows terminal就可以了。
+重启一下`windows terminal`就可以了。
 
 
 
@@ -108,7 +108,7 @@
 
 
 
-如果直接修改```hello.txt```文件，再次查看的时候，会是![image-20220510211707878](C:\Users\92800\AppData\Roaming\Typora\typora-user-images\image-20220510211707878.png)
+如果直接修改```hello.txt```文件，再次查看的时候，会是
 
 
 
