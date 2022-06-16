@@ -1,6 +1,5 @@
 # 1. 布局
 
-#### ![截屏2022-05-25 下午5.49.54](/Users/dongxin05/Library/Application Support/typora-user-images/截屏2022-05-25 下午5.49.54.png)
 
 这是一个项目简单框架，然后在```main```里的kt代码文件内容就是如下
 
@@ -145,4 +144,14 @@ class MainActivity : AppCompatActivity() {
 ##
 
 3.1 onCreat()
+
+# XML
+## 什么是xmlns 
+其实`xmlns`是`XMLnamespace`
+
+
+# 运行
+1. 在
+
+
 
