@@ -203,6 +203,7 @@ button.setOnClickListener {
 ```
 这是指定了`Intent`的`action`是`Intent.ACTION_VIEW`,是一个Android系统的内置动作，常量值为`android.intent.action.VIEW`。然后通过`Uri.parse()`的方法，将字符串解析然后把`Intent`的`setData()`方法传进去`Uri`对象传递进去。
 ### 生命周期
-
+当最开始的时候是启动，`creat`后先`start`和`resume`
+![](./img/2.png)
 ### 启动模式
 四种，分别是`standard`,`singleTop`,`singleTask`,`singleInstance`,
