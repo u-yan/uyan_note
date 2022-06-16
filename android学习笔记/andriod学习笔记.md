@@ -217,4 +217,12 @@ button.setOnClickListener {
 他这个是如果发现栈里没有新创建的`activity`那么就新创建，如果有了，那么直接把所有在之前的我的上面的`pop`掉。
 #### 3、singleTop
 如果发现栈顶是本身，就不会创建，如果2 -> 1,然后1 -> 2，如果发现`top`和新创建的不一样，还是会创建并且入栈
-#### 4、
+#### 4、singlestance
+![](./img/6.png)
+这里是给`SecondActivity`设置了`singlestance`所以到了另一个栈，如果从1->2->3那么在3按`back`的时候会到`1`，然后才会到`SecondActivity`。
+
+### ActivityCollector
+我们通过一个`List`来暂存活动，`addActivity()`添加活动，`removeActivity()`用于从`List`中移除活动，最后提供了一个`finish()`全部销毁。
+
+# UI
+一种比较简单的自定义view
