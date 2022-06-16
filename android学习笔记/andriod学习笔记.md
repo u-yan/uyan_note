@@ -151,7 +151,15 @@ class MainActivity : AppCompatActivity() {
 
 
 # 运行
-1. 在
-
+1. 在AndroidManifest一开始是没有`mainactivity`也就是说他不知道要启动哪一个activity,如果加上了
+```xml
+<intent-filter>
+    <action android:name = "android.intent.action.MAIN"/>
+    <category android:name = "android.intent.category.LAUNCHER"/>
+</intent-filter>
+``` 
+![](./img/0.png)
+就可以运行了。
+新建activity,andriod stdio会自动帮忙在
 
 
