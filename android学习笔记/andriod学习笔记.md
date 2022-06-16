@@ -205,5 +205,6 @@ button.setOnClickListener {
 ### 生命周期
 当最开始的时候是启动，`creat`后先`start`和`resume`
 ![](./img/2.png)
+然后第二次点击，就发现第二个`activity`已经把第一个`activity`完全遮住，所以第一个`pause`和`stop`都会调用，![](./img/3.png)
 ### 启动模式
 四种，分别是`standard`,`singleTop`,`singleTask`,`singleInstance`,
