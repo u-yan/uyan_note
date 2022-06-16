@@ -160,6 +160,49 @@ class MainActivity : AppCompatActivity() {
 ``` 
 ![](./img/0.png)
 就可以运行了。
-新建activity,andriod stdio会自动帮忙在
 
+新建activity,andriod stdio会自动帮忙在`AndroidManifest.xml`里注册![](./img/1.png)
+### intent
+两个活动要依靠`intent`,`intent`作用于服务，广播，这里先讲活动
+操作是创建一个`Intent`，然后当前活动`startActivity(Intent)`
+显式`intent`
+```kotlin
+button.setOnClickListener {
 
+    val intent = Intent()
+    intent.setClass(this, Mainactivity2Activity::class.java)//知识盲点
+    startActivity(intent)
+}
+```
+隐式`intent`
+```xml
+<activity
+    android:name=".Mainactivity2Activity"
+    android:exported="true"
+    android:label="Mainactivity2Activity">
+    <intent-filter>
+        <action android:name="com.example.activitytest.ACTION_START"/>
+        <category android:name="android.intent.category.DEFAULT"/>
+    </intent-filter>
+</activity>
+```
+注意，在`intent`构造的时候，必须被唤醒的`activity`的标签中，`action`和`category`必须和intent一样，如果构造`intent`不给第二个`category`那么这个`intent`的`category`默认值是`"android.intent.category.DEFAULT"`
+**同时注意结构**
+```kotlin
+button.setOnClickListener {
+    val intent = Intent("com.example.activitytest.ACTION_START")
+    startActivity(intent)
+}
+```
+```kotlin
+button.setOnClickListener {
+    val intent = Intent(Intent.ACTION_VIEW);
+    intent.setData(Uri.parse("http://www.baidu.com"))
+    startActivity(intent)
+}
+```
+这是指定了`Intent`的`action`是`Intent.ACTION_VIEW`,是一个Android系统的内置动作，常量值为`android.intent.action.VIEW`。然后通过`Uri.parse()`的方法，将字符串解析然后把`Intent`的`setData()`方法传进去`Uri`对象传递进去。
+### 生命周期
+
+### 启动模式
+四种，分别是`standard`,`singleTop`,`singleTask`,`singleInstance`,
