@@ -226,3 +226,4 @@ button.setOnClickListener {
 
 # UI
 一种比较简单的自定义view
+![](./img/7.png)
