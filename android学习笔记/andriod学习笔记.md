@@ -206,5 +206,10 @@ button.setOnClickListener {
 当最开始的时候是启动，`creat`后先`start`和`resume`
 ![](./img/2.png)
 然后第二次点击，就发现第二个`activity`已经把第一个`activity`完全遮住，所以第一个`pause`和`stop`都会调用，![](./img/3.png)
+这次然后再次点击安卓的返回键，![](./img/4.png)又发现了第一个`activity`是先`restart`，然后是`start`和`resume`这两个常规流程
+如果没有被完全遮盖，那么只有`pause`然后恢复的时候是只有`resume`
 ### 启动模式
-四种，分别是`standard`,`singleTop`,`singleTask`,`singleInstance`,
+四种，分别是`standard`,`singleTop`,`singleTask`,`singleInstance`,可在`AndroidManifet.xml`中通过给<activity>指定`android:launchMode`属性来选择启动模式。
+#### 1、standard
+标准的，即他不管返回栈顶中有多少个自己的`activity`，如果你让他创建，他会一直创建，然后返回键也要按相应次数。不合理，因为本来就在栈顶了，还创建，没有意义，一个就够了。
+#### 2、singleTask
