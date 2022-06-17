@@ -225,5 +225,24 @@ button.setOnClickListener {
 我们通过一个`List`来暂存活动，`addActivity()`添加活动，`removeActivity()`用于从`List`中移除活动，最后提供了一个`finish()`全部销毁。
 
 # UI
-一种比较简单的自定义view
+### 1
+一种比较简单的自定义view，首先自己写出相应的`xml`
+![](./img/8.png)
+然后再添加一句话，就是`<include layout="@layout/xxxx"/>`
 ![](./img/7.png)
+### 2
+#### 2.1
+如果要响应事件修改属性，那么就要暴露接口，用自定义控件的方式解决。
+最简单的一种形式，就只需要创建一个类然后`inflate`引入就好了。    
+```kotlin
+class TitleLayout  : LinearLayout {
+    constructor(context: Context):super(context) {
+        TitleLayout(context, null);
+    }
+    constructor(context: Context, attrs: AttributeSet?):super(context, attrs) {
+        LayoutInflater.from(context).inflate(R.layout.title, this)
+    }
+}
+```
+#### 2.2
+如果要暴露属性让别人可以修改，

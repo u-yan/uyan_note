@@ -18,4 +18,12 @@ If a method has N parameters and M of which have default values, M overloads are
 ### 记录常用的问题
 
 1. system out 直接`println("xxx")`
+2. 类继承
+```kotlin
+class TitleLayout  (context: Context, attrs: AttributionSource): LinearLayout(context) {
+    init {
+        
+    }
+}
+```
 
