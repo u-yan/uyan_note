@@ -376,3 +376,5 @@ class MainActivity : AppCompatActivity() {
 动态注册，只有在`onCreate`中才能生效，静态注册可以不需要启动一开机就能生效。
 这是在`Androidmanifest.xml`里的。
 ![](./img/13.png)
+同样还是修改权限
+![](./img/14.png)，其实用
