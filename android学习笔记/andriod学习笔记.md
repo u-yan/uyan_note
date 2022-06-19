@@ -335,4 +335,41 @@ button.setOnClickListener(object: View.OnClickListener {
 # 广播
 - 标准广播`Normal broadcasts`是一种完全异步执行的广播，在广播发出后，所有的广播接收器几乎都会在同一时刻接收到这条广播消息，没有先后顺序，效率高，但是无法被截断。
 ![](./img/10.png)
-- 有序广播`Ordered broadcasts`是同步执行的广播，在广播发出后，同一时刻只有一个广播接收器接收，相当于是接收者排队接收，并且先接收的还可截断。
+- 有序广播`Ordered broadcasts`是同步执行的广播，在广播发出后，同一时刻只有一个广播接收器接收，相当于是接收者排队接收，并且先接收的还可截断。![](./img/11.png)
+
+## 广播注册
+### 一、在代码中注册（动态注册）
+[demo]()
+动态注册用
+```kotlin
+class MainActivity : AppCompatActivity() {
+    lateinit private var intentFilter: IntentFilter//lateinit是指后面对他进行初始化。
+    lateinit private var networkChangeReceiver: NetworkChangeReceiver
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        intentFilter = IntentFilter()
+        intentFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE")
+        networkChangeReceiver = NetworkChangeReceiver()
+        registerReceiver(networkChangeReceiver, intentFilter)
+    }
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(networkChangeReceiver);
+    }
+    class NetworkChangeReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            var connectivityManager: ConnectivityManager? =
+                context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?//这个方法基于context,只有
+            var networkInfo : NetworkInfo? = connectivityManager?.activeNetworkInfo;
+            if (networkInfo != null && networkInfo.isAvailable) {
+                Toast.makeText(context, "network isAvailable", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "network isNotAvailable", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+}
+```
+效果是，每当有网络切换时，`BroadcastReceiver`就会收到消息，消息种类是`intentFilter`加进去的，启用这个`Receiver`就可以，但是网络这种要有`Android`权限，在`AndroidManifest.xml`里加上就可。
+### 二、在`AndroidManifest.xml`中注册（静态注册）
