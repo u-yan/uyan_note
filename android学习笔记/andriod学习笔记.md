@@ -378,3 +378,4 @@ class MainActivity : AppCompatActivity() {
 ![](./img/13.png)
 同样还是修改权限
 ![](./img/14.png)，其实用
+![](./img/15.png)
