@@ -371,5 +371,6 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
-效果是，每当有网络切换时，`BroadcastReceiver`就会收到消息，消息种类是`intentFilter`加进去的，启用这个`Receiver`就可以，但是网络这种要有`Android`权限，在`AndroidManifest.xml`里加上就可。
+效果是，每当有网络切换时，`BroadcastReceiver`就会收到消息，消息种类是`intentFilter`加进去的，启用这个`Receiver`就可以，但是网络这种要有`Android`权限，在`AndroidManifest.xml`里加上`<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE`就可。![](./img/12.png)
 ### 二、在`AndroidManifest.xml`中注册（静态注册）
+动态注册，只有在`onCreate`中才能生效，静态注册可以不需要启动一开机就能生效。
