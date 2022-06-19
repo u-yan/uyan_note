@@ -334,4 +334,5 @@ button.setOnClickListener(object: View.OnClickListener {
 
 # 广播
 - 标准广播`Normal broadcasts`是一种完全异步执行的广播，在广播发出后，所有的广播接收器几乎都会在同一时刻接收到这条广播消息，没有先后顺序，效率高，但是无法被截断。
-![](./img/0.png)
+![](./img/10.png)
+- 有序广播`Ordered broadcasts`是同步执行的广播，在广播发出后，同一时刻只有一个广播接收器接收，相当于是接收者排队接收，并且先接收的还可截断。
