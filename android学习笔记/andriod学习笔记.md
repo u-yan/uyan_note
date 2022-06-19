@@ -246,3 +246,91 @@ class TitleLayout  : LinearLayout {
 ```
 #### 2.2
 如果要暴露属性让别人可以修改，
+![](./img/9.png)
+首先要在`res/values`里创建`attrs.xml`,当`inflate`完后提取出来所要修改的`view`和所要赋值属性的值，然后进行所需要的修改。
+```kotlin
+LayoutInflater.from(context).inflate(R.layout.title, this)
+var title_back: Button = findViewById(R.id.title_back)
+val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleLayout)
+val title_back_content : String? = typedArray.getString(R.styleable.TitleLayout_back);
+title_back.setText(title_back_content)
+```
+
+## ListView
+数组中的数据无法传递给`ListView`所以借助适配器完成，然后用了`ArrayAdapter`适配器，`ArrayAdapter`构造函数要传入上下文和子项布局的`id`,以及要适配的数据，`android.R.layout.simple_list_item_1`这是一个安卓内置布局文件，里面只有一个`textview`,然后修改适配器就可以了。
+```kotlin
+class MainActivity : AppCompatActivity() {
+    val array = Array(5, { i -> i * i * i})
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        var mDatas: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)//
+        for(index in array.indices) {
+            mDatas.add(index.toString())
+            Log.d("oooooooo", index.toString())
+        }
+        var listView :ListView= findViewById(R.id.list_view);
+//        var titleLayout:TitleLayout = findViewById(R.id.titleLayout)
+//        listView.addView(titleLayout)
+        listView.adapter = mDatas;
+        Log.d("oooooooo", mDatas.toString())
+    }
+}
+
+```
+
+
+
+
+
+# fragment
+其实每个`fragment`可以理解成自定义的组件，也是载入`xml`，不过是直接在`layout`里写，可以发现`main_activity`里不需要写哪一个`fragment`,而是在`xml`里写好了。
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    var button = findViewById<Button>(R.id.button)
+    button.setOnClickListener(object: View.OnClickListener {
+        override fun onClick(v: View) {
+            when (v.getId()) {
+                R.id.button -> {
+                    Log.d("????", "click: ")
+                    replaceFragment(AnotherRightFragment());
+                }
+            }
+        }
+    });
+}
+```
+```kotlin
+private fun replaceFragment(fragment: Fragment) {
+    val fragmentManager:FragmentManager = getSupportFragmentManager();//获取一个FragmentManager
+    val transaction:FragmentTransaction = fragmentManager.beginTransaction()//然后开启一个事物
+    Log.d("????", "replaceFragment: ")
+    transaction.addToBackStack(null)//添加到返回栈，所以按back键就是对应的返回了。
+    transaction.replace(R.id.right_layout, fragment)//
+    transaction.commit()
+}
+```
+
+这是`Button`的跳转
+```kotlin
+button.setOnClickListener(object: View.OnClickListener {
+    override fun onClick(v: View) {
+        when (v.getId()) {
+            R.id.button -> {
+                Log.d("????", "click: ")
+                replaceFragment(AnotherRightFragment());
+            }
+        }
+    }
+})
+```
+
+
+
+
+
+# 广播
+- 标准广播`Normal broadcasts`是一种完全异步执行的广播，在广播发出后，所有的广播接收器几乎都会在同一时刻接收到这条广播消息，没有先后顺序，效率高，但是无法被截断。
