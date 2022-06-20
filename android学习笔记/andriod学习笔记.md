@@ -277,6 +277,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 ```
+
 ## RecyclerView
 如果要用`RecyclerView`那么要在`build.gradle`中添加相应的依赖库，
 
