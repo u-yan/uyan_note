@@ -273,12 +273,12 @@ class MainActivity : AppCompatActivity() {
 //        var titleLayout:TitleLayout = findViewById(R.id.titleLayout)
 //        listView.addView(titleLayout)
         listView.adapter = mDatas;
-        Log.d("oooooooo", mDatas.toString())
     }
 }
 
 ```
-
+## RecyclerView
+如果要用`RecyclerView`那么要在`build.gradle`中添加相应的依赖库，
 
 
 
@@ -379,3 +379,8 @@ class MainActivity : AppCompatActivity() {
 同样还是修改权限
 ![](./img/14.png)，其实用
 ![](./img/15.png)
+![](./img/16.png)
+`exported`是否接受除了本程序以外的广播，
+`enabled`是否生效，点击`finish`后在`AndroidManifest.xml`就会自动加上部分，然后也会有一个新的类。
+
+### 标准广播
