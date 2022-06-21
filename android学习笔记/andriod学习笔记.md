@@ -404,4 +404,4 @@ override fun onCreate(savedInstanceState: Bundle?) {
     webView.loadUrl("http://www.baidu.com")
 }
 ```
-如果直接使用，那么会
+如果直接使用，那么会![](./img/18.png)
