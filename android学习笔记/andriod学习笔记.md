@@ -393,7 +393,7 @@ class MainActivity : AppCompatActivity() {
 
 
 # WebView
-
+布局文件
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -404,4 +404,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
     webView.loadUrl("http://www.baidu.com")
 }
 ```
+
 如果直接使用，那么会![](./img/18.png)
+所以在这个位置添加，即可。
+![](./img/19.png)
