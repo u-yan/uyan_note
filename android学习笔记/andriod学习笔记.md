@@ -280,7 +280,7 @@ class MainActivity : AppCompatActivity() {
 
 ## RecyclerView
 如果要用`RecyclerView`那么要在`build.gradle`中添加相应的依赖库，
-
+![](./img/17.png)
 
 
 
@@ -385,3 +385,23 @@ class MainActivity : AppCompatActivity() {
 `enabled`是否生效，点击`finish`后在`AndroidManifest.xml`就会自动加上部分，然后也会有一个新的类。
 
 ### 标准广播
+
+
+
+
+
+
+
+# WebView
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+    var webView:WebView = findViewById(R.id.web_view)
+    webView.settings.javaScriptEnabled
+    webView.webViewClient = WebViewClient()
+    webView.loadUrl("http://www.baidu.com")
+}
+```
+如果直接使用，那么会
