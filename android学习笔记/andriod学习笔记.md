@@ -426,3 +426,5 @@ var connection:HttpURLConnection = url.openConnection() as HttpURLConnection;
 
 
 # 数据存储方案
+
+![](./img/21.png)
