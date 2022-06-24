@@ -394,6 +394,8 @@ class MainActivity : AppCompatActivity() {
 
 # WebView
 布局文件
+![](./img/20.png)
+也很简单
 ```kotlin
 override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -404,7 +406,23 @@ override fun onCreate(savedInstanceState: Bundle?) {
     webView.loadUrl("http://www.baidu.com")
 }
 ```
-
+首先获取到`webview`，然后可以设置一些属性，比如支持`javascript`脚本，传入一个`WebViewClient()`的作用是防止跳转到另一个网页的时候，唤醒浏览器而不再当前`app`上了。
 如果直接使用，那么会![](./img/18.png)
 所以在这个位置添加，即可。
 ![](./img/19.png)
+## HTTP协议访问网络
+### HttpURLConnection
+首先获取到`HttpURLConnection`实例，
+```
+var url :URL = URL("http://www.baidu.com")
+var connection:HttpURLConnection = url.openConnection() as HttpURLConnection;
+```
+一定不要忘记加权限，[demo](https://github.com/u-yan/demo_of_android/tree/main/NetworkTest)
+
+
+
+# 服务
+
+
+
+# 数据存储方案

@@ -92,7 +92,7 @@
 
 
 
-```git commit -m "commit_name```提交本地库
+```git commit -m "commit_name"```提交本地库
 
 
 
@@ -203,7 +203,7 @@
 ```git remote add xxx https://xxx```给远程库创建别名-
 
 提交远程库的时候，```git push 别名 当前分支名```
-
+`git push -u origin feature-button-stepper -f`本地`merge`完最新的，强制`push`
 
 
 ```
