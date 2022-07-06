@@ -426,5 +426,7 @@ var connection:HttpURLConnection = url.openConnection() as HttpURLConnection;
 
 
 # 数据存储方案
-
+## 文件存储
+存储路径，`/data/data/com.example.fileoutputstream/files/自定义`
 ![](./img/21.png)
+![](./img/22.png)
