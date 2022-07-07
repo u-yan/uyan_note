@@ -270,11 +270,39 @@ task helloDelegate {
 
 
 # 任务
-
+## 创建
+### 1
 ```
 def Task ex41CreateTaskl = task(ex41CreateTaskl)
 ex41CreateTaskl.doLast {
 	println "创建方法的原型为：Task task(String name) throws"
 }
 ```
-接受一个name(任务名称)为参数，返回一个Task对象，在例子中把这个返回对象赋给一个Task类型的变量就可以操作
+接受一个name(任务名称)为参数，返回一个Task对象，在例子中把这个返回对象赋给一个Task类型的变量就可以操作。
+
+### 2
+```
+def Task ex41CreateTask2 = task(ex41CreateTask2, group: BasePlugin.BUILD_GROUP)
+ex41CreateTask2.doLast {
+	println "创建方法的原型为：Task task(Map<String, ?> args, String name) throws InvalidUserDataException"
+	println "任务分组：${ex41CreateTask2.group}"
+}
+
+```
+![](./img/1.png)
+
+### 3
+
+```
+task ex41CreateTask3 {
+	description '演示任务创建'
+	doLast {
+		println "创建方法原型为：Task task(String name, Closure configureClosure)"
+		println "任务描述：${description}"
+	}
+}
+```
+
+## 访问任务
+
+### 1
