@@ -267,3 +267,14 @@ task helloDelegate {
     new 
 }
 ```
+
+
+# 任务
+
+```
+def Task ex41CreateTaskl = task(ex41CreateTaskl)
+ex41CreateTaskl.doLast {
+	println "创建方法的原型为：Task task(String name) throws"
+}
+```
+接受一个name(任务名称)为参数，返回一个Task对象，在例子中把这个返回对象赋给一个Task类型的变量就可以操作
