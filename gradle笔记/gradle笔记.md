@@ -306,3 +306,257 @@ task ex41CreateTask3 {
 ## 访问任务
 
 ### 1
+
+
+```
+task ex42AccessTask1
+ex42AccessTask1.doLast {
+	println 'ex42AccessTask1.doLast'
+}
+task ex42AccessTask2
+tasks['ex42AccessTask2'].doLast {
+	println 'ex42AccessTask2.doLast'
+}
+```
+多种方式访问任务。
+```
+task ex42AccessTask1
+
+ex42AccessTask1.doLast {
+	println 'ex42AccessTask1.doLast'
+}
+
+
+task ex42AccessTask2
+
+tasks['ex42AccessTask2'].doLast {
+	println 'ex42AccessTask2.doLast'
+}
+task ex42AccessTask3
+tasks['ex42AccessTask3'].doLast {
+	println tasks.findByPath('ex42AccessTask3')
+	println tasks.getByPath('ex42AccessTask3')
+	println tasks.findByPath('asdfasdf')
+}
+task ex42AccessTask4
+tasks['ex42AccessTask4'].doLast {
+	println tasks.findByPath('ex42AccessTask4')
+	println tasks.getByPath('ex42AccessTask4')
+	println tasks.findByPath('asdfasdf')
+}
+
+```
+
+![](./img/2.png)
+## 任务分组和描述
+```
+def Task myTask = task ex43GroupTask
+myTask.group = BasePlugin.BUILD_GROUP
+myTask.description= '这是一个构建任务'
+
+myTask.doLast {
+	println "group${group},description:${description}"
+}
+```
+## 任务的执行分析
+
+```
+def Task myTask1 = task ex45CustomTask(type: CustomTask)
+myTask1.doFirst {
+	println 'Task执行之前执行in doFirst'
+}
+myTask1.doLast {
+	println 'Task执行之后执行in doLast'
+}
+
+class CustomTask extends DefaultTask {
+	@TaskAction
+	def doSelf () {
+		println 'Task自己本身在执行in doSelf'
+	}
+}
+```
+结果
+```
+➜  android-gradle-book-code ./gradlew ex45CustomTask
+
+> Task :ex45CustomTask
+Task执行之前执行in doFirst
+Task自己本身在执行in doSelf
+Task执行之后执行in doLast
+
+BUILD SUCCESSFUL in 428ms
+1 actionable task: 1 executed
+```
+任务排序，
+- taskB.shouldRunAfter(taskA)B应该在a之后执行
+```
+task ex46OrderTask1 {
+	doLast {
+		println 'ex46OrderTask1'
+	}
+
+}
+task ex46OrderTask2 {
+	doLast {
+		println 'ex46OrderTask2'
+	}
+}
+
+ex46OrderTask2.shouldRunAfter ex46OrderTask1
+```
+输出
+```
+ ➜  android-gradle-book-code ./gradlew ex46OrderTask2 ex46OrderTask1
+
+> Task :ex46OrderTask1
+ex46OrderTask1
+
+> Task :ex46OrderTask2
+ex46OrderTask2
+
+BUILD SUCCESSFUL in 938ms
+2 actionable tasks: 2 executed
+```
+- taskB.mustRunAfter(taskA)B必须在a之后执行
+
+```
+task ex46OrderTask1 {
+	doLast {
+		println 'ex46OrderTask1'
+	}
+
+}
+task ex46OrderTask2 {
+	doLast {
+		println 'ex46OrderTask2'
+	}
+}
+
+ex46OrderTask2.mustRunAfter ex46OrderTask1
+```
+结果
+```
+➜  android-gradle-book-code ./gradlew ex46OrderTask2 ex46OrderTask1
+
+> Task :ex46OrderTask1
+ex46OrderTask1
+
+> Task :ex46OrderTask2
+ex46OrderTask2
+
+BUILD SUCCESSFUL in 745ms
+2 actionable tasks: 2 executed
+```
+
+跳过任务
+```
+task ex47DisenabledTask {
+	doLast {
+		println 'ex47DisenabledTask'
+	}
+}
+ex47DisenabledTask.enabled = false
+```
+结果
+```
+> Task :ex47DisenabledTask SKIPPED
+
+BUILD SUCCESSFUL in 227ms
+```
+
+代码
+```
+final String BUILD_APPS_ALL="all";
+final String BUILD_APPS_SHOUFA="shoufa";
+final String BUILD_APPS_EXCLUDE_SHOUFA="exclude_shoufa";
+
+task ex48QQRelease {
+    doLast {
+        println "打应用宝包"
+    }
+}
+task ex48BaiduRelease {
+    doLast {
+        println "打百度的包"
+    }
+}
+task ex48HuaweiRelease {
+    doLast {
+        println "打华为的包"
+    }
+}
+task ex48MiuiRelease {
+    doLast {
+        println "打MiUi的包"
+    }
+}
+task build {
+    group BasePlugin.BUILD_GROUP
+    description "打渠道包"
+}
+build.dependsOn ex48QQRelease,ex48BaiduRelease, ex48HuaweiRelease, ex48MiuiRelease
+
+ex48QQRelease.onlyIf {
+    def execute = false
+    if (project.hasProperty("build_apps")) {
+        Object buildApps = project.property("build_apps")
+        if (BUILD_APPS_SHOUFA.equals(buildApps)
+                || BUILD_APPS_ALL.equals(buildApps)) {
+            execute = true
+        } else {
+            execute = false
+        }
+    }else {
+        execute = true
+    }
+    execute
+}
+
+ex48BaiduRelease.onlyIf {
+    def excute = false
+    if (project.hasProperty("build_apps")) {
+        Object buildApps = project.property("build_apps")
+        if (BUILD_APPS_SHOUFA.equals(buildApps)//首发
+                || BUILD_APPS_ALL.equals(buildApps)) {
+            excute = true
+        } else {
+            excute = false
+        }
+    }else {
+        excute = true
+    }
+    excute
+}
+ex48MiuiRelease.onlyIf {
+    def execute = false
+    if (project.hasProperty("build_apps")) {
+        Object buildApps = project.property("build_apps")
+        if (BUILD_APPS_ALL.equals(buildApps)) {//非首发
+            execute = true
+        } else {
+            execute = false
+        }
+    }else {
+        execute = true
+    }
+    execute
+}
+
+```
+然后可以自己动态选择。
+```
+＃打所有渠道包
+./gradlew :example48:build
+./gradlew -Pbuild apps=all :example48 : build
+
+
+＃打首发包
+./gradlew -Pbuild_apps=shoufa :example48 : build
+＃打非首发包
+./gradlew -Pbuild_apps=exclude shoufa :example48:build
+
+```
+
+# Gradle插件
+
